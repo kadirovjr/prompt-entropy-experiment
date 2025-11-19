@@ -85,16 +85,23 @@ We use **temperature=1.0** as the baseline for this research for three important
 
 ### Multi-Temperature Studies (Advanced)
 
-To ensure our findings are robust, we recommend testing at multiple temperatures:
+To ensure our findings are robust, we recommend testing at multiple temperatures **symmetrically around the baseline**:
+
+**Temperature Range:**
+- **Below baseline** (conservative): 0.5, 0.7
+- **At baseline** (natural): 1.0
+- **Above baseline** (creative): 1.2, 1.5
+
+This symmetric design allows us to test if the effect holds across the full spectrum of sampling regimes.
 
 ```bash
 # Quick validation: baseline + one comparison
 make run-temperature-baseline EXPERIMENT=temp_validation
 # Tests: temp=0.7 (realistic) and temp=1.0 (baseline)
 
-# Full temperature study (WARNING: 4x time and cost)
+# Full temperature study (WARNING: 5x time and cost)
 make run-temperature-study EXPERIMENT=temp_comprehensive
-# Tests: temp=0.5, 0.7, 1.0, 1.2
+# Tests: temp=0.5, 0.7, 1.0, 1.2, 1.5 (symmetric around baseline)
 
 # Small pilot study (3 tasks, 5 samples)
 make run-temperature-study-small EXPERIMENT=temp_pilot
@@ -104,11 +111,12 @@ make run-temperature-study-small EXPERIMENT=temp_pilot
 1. **Main effect holds**: Specification prompts reduce entropy at ALL temperatures
 2. **Interaction effect**: The effect is stronger at higher temperatures
 3. **Robustness**: MI-entropy correlation is consistent across temperatures
+4. **Symmetry**: Effect should be observable both above and below baseline
 
 **Time & cost impact:**
 - Baseline (1 temp): ~2-3 hours, $30-50
 - Two temps (0.7, 1.0): ~4-6 hours, $60-100
-- Four temps (0.5, 0.7, 1.0, 1.2): ~8-12 hours, $120-200
+- Five temps (0.5, 0.7, 1.0, 1.2, 1.5): ~10-15 hours, $150-250
 
 **Recommendation for budget-conscious research:**
 1. Run main experiment at temperature=1.0 (baseline)
