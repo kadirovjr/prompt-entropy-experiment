@@ -1,3 +1,8 @@
+<div align="right">
+**"The limits of my language mean the limits of my world."**
+  — Ludwig Wittgenstein, _Philosophical Investigations_
+<div>
+
 # Prompt Entropy Experiment
 
 Empirical validation of information-theoretic principles in prompt engineering for generative AI systems.
