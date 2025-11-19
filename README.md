@@ -5,7 +5,9 @@
   
 </div>
 
-![Speaking Head emoji from Microsoft Teams (3D Animated) (2024)](./speaking-head_1f5e3-fe0f.png)
+
+<img src="abacus_1f9ee.webp" alt="Abacus" title="Abacus Emoji from Telegram (2023)" height="150" />
+
 
 # Prompt Entropy Experiment
 
