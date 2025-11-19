@@ -1,0 +1,390 @@
+# Data Generation Methodology
+
+This document describes the complete methodology for generating the experimental dataset used in the prompt entropy research, ensuring full reproducibility of results.
+
+## Overview
+
+The dataset consists of **1,800 LLM generations** collected across:
+- **30 tasks** spanning 6 domains
+- **2 prompt types** (specification-driven vs. vague)
+- **2 models** (GPT-4, Claude-3 Opus)
+- **30 samples per condition** with temperature=1.0
+
+## Experimental Design
+
+### Domains and Tasks
+
+#### 1. Technical Programming (5 tasks)
+- **Task 1.1**: Write a binary search function
+- **Task 1.2**: Implement a linked list data structure
+- **Task 1.3**: Create a REST API endpoint
+- **Task 1.4**: Write a regular expression parser
+- **Task 1.5**: Implement quicksort algorithm
+
+#### 2. Data Analysis (5 tasks)
+- **Task 2.1**: Analyze sales data trends
+- **Task 2.2**: Clean and preprocess dataset
+- **Task 2.3**: Calculate statistical summaries
+- **Task 2.4**: Create data visualization
+- **Task 2.5**: Perform correlation analysis
+
+#### 3. Business Analysis (5 tasks)
+- **Task 3.1**: Write market analysis report
+- **Task 3.2**: Create SWOT analysis
+- **Task 3.3**: Develop pricing strategy
+- **Task 3.4**: Analyze competitor landscape
+- **Task 3.5**: Write business requirements
+
+#### 4. Technical Writing (5 tasks)
+- **Task 4.1**: Write API documentation
+- **Task 4.2**: Create user guide
+- **Task 4.3**: Document architecture design
+- **Task 4.4**: Write technical specification
+- **Task 4.5**: Create troubleshooting guide
+
+#### 5. Creative Writing (5 tasks)
+- **Task 5.1**: Write short story opening
+- **Task 5.2**: Create product description
+- **Task 5.3**: Draft email campaign
+- **Task 5.4**: Write blog post introduction
+- **Task 5.5**: Create social media content
+
+#### 6. Explanatory Content (5 tasks)
+- **Task 6.1**: Explain machine learning concept
+- **Task 6.2**: Describe database indexing
+- **Task 6.3**: Explain API architecture
+- **Task 6.4**: Describe cloud computing
+- **Task 6.5**: Explain cryptography basics
+
+## Prompt Engineering
+
+### Specification-Driven Prompts
+
+Specification-driven prompts include:
+
+1. **Explicit constraints**: "Must handle edge cases", "Required to return JSON"
+2. **Format specifications**: "Output format: markdown table", "Structure: header, body, footer"
+3. **Parameter details**: "Function signature: add(a: int, b: int) -> int"
+4. **Examples**: "For instance, input [1,2,3] should return 6"
+5. **Technical requirements**: "Use Python 3.10+", "Follow PEP 8 style"
+6. **Success criteria**: "Should pass test cases", "Must achieve 95% accuracy"
+
+**Example**:
+```
+Write a Python function named 'binary_search' that:
+- Takes parameters: sorted_list (List[int]), target (int)
+- Returns: int (index of target or -1 if not found)
+- Must handle: empty lists, single elements, duplicates
+- Time complexity: O(log n)
+- Include: type hints and docstring
+- Format: Follow PEP 8 style guide
+```
+
+### Vague Prompts
+
+Vague prompts are intentionally underspecified:
+
+1. **Generic requests**: "Write a function"
+2. **Minimal context**: "Analyze the data"
+3. **No format guidance**: "Create documentation"
+4. **Missing constraints**: "Build an API"
+5. **Unclear scope**: "Explain the concept"
+
+**Example**:
+```
+Write a search function.
+```
+
+## Data Collection Protocol
+
+### Environment Setup
+
+```bash
+# 1. Set up virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure API keys
+cp .env.example .env
+# Edit .env with your API keys:
+# OPENAI_API_KEY=your_key_here
+# ANTHROPIC_API_KEY=your_key_here
+```
+
+### Collection Script
+
+```python
+from src.sampling import sample_responses
+from src.utils import save_json, ensure_dir
+import time
+
+# Configuration
+TASKS = [...]  # Load from tasks.json
+PROMPT_TYPES = ['specification', 'vague']
+MODELS = ['gpt-4', 'claude-3-opus']
+N_SAMPLES = 30
+TEMPERATURE = 1.0
+
+# Collection loop
+for task_id, task in enumerate(TASKS):
+    for prompt_type in PROMPT_TYPES:
+        for model in MODELS:
+            # Get appropriate prompt
+            prompt = task['prompts'][prompt_type]
+
+            # Sample responses
+            responses = sample_responses(
+                prompt=prompt,
+                model=model,
+                n=N_SAMPLES,
+                temperature=TEMPERATURE,
+                show_progress=True,
+                delay_between_requests=0.5,  # Rate limiting
+            )
+
+            # Save raw data
+            filename = f"task_{task_id}_{prompt_type}_{model}.json"
+            save_json({
+                'task_id': task_id,
+                'task_description': task['description'],
+                'prompt_type': prompt_type,
+                'prompt': prompt,
+                'model': model,
+                'temperature': TEMPERATURE,
+                'n_samples': N_SAMPLES,
+                'responses': responses,
+                'timestamp': time.time(),
+            }, f"data/raw/{filename}")
+
+            # Rate limiting between conditions
+            time.sleep(2)
+```
+
+### Rate Limiting
+
+To respect API rate limits:
+
+- **OpenAI GPT-4**: 0.5-1.0 second delay between requests
+- **Anthropic Claude-3**: 0.5-1.0 second delay between requests
+- **Between conditions**: 2-5 second delay
+- **Error handling**: Exponential backoff for rate limit errors
+
+### Error Handling
+
+```python
+import time
+from tenacity import retry, wait_exponential, stop_after_attempt
+
+@retry(
+    wait=wait_exponential(multiplier=1, min=4, max=60),
+    stop=stop_after_attempt(5),
+)
+def sample_with_retry(prompt, model, **kwargs):
+    """Sample with automatic retry on failures"""
+    try:
+        return sample_responses(prompt, model, **kwargs)
+    except RateLimitError:
+        print("Rate limit hit, backing off...")
+        raise
+    except APIError as e:
+        print(f"API error: {e}")
+        raise
+```
+
+## Metrics Calculation
+
+### 1. Entropy Metrics
+
+```python
+from src.metrics import calculate_all_entropies
+from src.sampling import get_embeddings
+
+# Calculate token entropy
+entropy = calculate_all_entropies(responses)
+
+# Calculate semantic entropy (requires embeddings)
+embeddings = get_embeddings(responses)
+entropy = calculate_all_entropies(responses, embeddings)
+```
+
+**Metrics computed**:
+- **Token entropy**: Shannon entropy over token distribution
+- **Semantic entropy**: Clustering-based entropy in embedding space
+- **Structural entropy**: Entropy over structural features
+
+### 2. Mutual Information
+
+```python
+from src.metrics import estimate_mutual_information
+
+mi = estimate_mutual_information(
+    prompt=prompt,
+    task=task_description,
+    prompt_embedding=prompt_emb,
+    task_embedding=task_emb,
+)
+```
+
+**Estimation methods**:
+- **MI content**: Information content indicators (numbers, constraints, examples)
+- **MI coverage**: Task concept coverage
+- **MI semantic**: Embedding similarity
+- **MI combined**: Weighted combination
+
+### 3. Quality Assessment
+
+```python
+from src.metrics import calculate_overall_quality
+
+quality = calculate_overall_quality(
+    response=response,
+    task=task_description,
+    response_embedding=response_emb,
+    task_embedding=task_emb,
+    expected_elements=task['expected_elements'],
+    required_components=task['required_components'],
+    format_requirements=task['format_requirements'],
+)
+```
+
+**Quality dimensions**:
+- **Correctness** (35%): Task-specific correctness
+- **Completeness** (25%): Required components present
+- **Relevance** (20%): Semantic relevance to task
+- **Coherence** (10%): Internal coherence
+- **Format compliance** (10%): Format requirements
+
+## Statistical Analysis
+
+### Hypothesis Testing
+
+```python
+from src.analysis import paired_t_test, effect_size_interpretation
+
+# Compare specification vs vague
+result = paired_t_test(
+    spec_entropies,
+    vague_entropies,
+)
+
+print(f"t({result.degrees_of_freedom})={result.t_statistic:.2f}")
+print(f"p={result.p_value:.4f}")
+print(f"Cohen's d={result.cohens_d:.2f} ({effect_size_interpretation(result.cohens_d)})")
+```
+
+### Correlation Analysis
+
+```python
+from src.analysis import pearson_correlation
+
+# MI-Entropy correlation
+result = pearson_correlation(mi_values, entropy_values)
+print(f"r={result.r:.3f}, p={result.p_value:.4f}")
+```
+
+## Data Storage Structure
+
+```
+data/
+├── raw/                          # Raw LLM generations
+│   ├── task_00_specification_gpt-4.json
+│   ├── task_00_specification_claude-3-opus.json
+│   ├── task_00_vague_gpt-4.json
+│   └── ...
+├── processed/                    # Processed metrics
+│   ├── entropies.csv
+│   ├── mutual_information.csv
+│   ├── quality_scores.csv
+│   └── embeddings.pkl
+└── tasks/                        # Task definitions
+    └── tasks.json
+```
+
+## Reproducibility Checklist
+
+- [ ] Use same model versions (GPT-4-0613, Claude-3-Opus-20240229)
+- [ ] Set temperature=1.0 for all generations
+- [ ] Collect exactly 30 samples per condition
+- [ ] Use same prompt templates
+- [ ] Apply same preprocessing steps
+- [ ] Use same embedding model (text-embedding-3-small)
+- [ ] Follow same metrics calculation procedures
+- [ ] Use same statistical tests and parameters
+- [ ] Record timestamps and metadata
+- [ ] Version control all code
+
+## Random Seed Management
+
+For reproducible analysis:
+
+```python
+import numpy as np
+import random
+
+# Set seeds
+RANDOM_SEED = 42
+np.random.seed(RANDOM_SEED)
+random.seed(RANDOM_SEED)
+```
+
+**Note**: LLM generation is inherently stochastic. Setting temperature=1.0 ensures high diversity, but exact responses cannot be reproduced. Statistical properties should be reproducible across different runs.
+
+## Validation
+
+### Data Quality Checks
+
+1. **Response count**: Verify 30 responses per condition
+2. **Empty responses**: Check for and handle empty/error responses
+3. **Outliers**: Identify and investigate statistical outliers
+4. **Duplicates**: Check for and remove duplicate responses
+5. **Format compliance**: Verify responses match expected format
+
+### Metric Validation
+
+1. **Entropy bounds**: Token entropy should be positive
+2. **MI bounds**: Mutual information should be non-negative
+3. **Quality bounds**: All quality scores should be in [0, 1]
+4. **Correlation sanity**: MI-entropy correlation should be negative
+
+## Timeline
+
+Estimated time for full data collection:
+
+- **Setup**: 1 hour
+- **Task definition**: 4 hours
+- **Prompt engineering**: 8 hours
+- **Data collection**: 10-15 hours (with rate limiting)
+- **Metrics calculation**: 2-4 hours
+- **Quality validation**: 2 hours
+- **Statistical analysis**: 2 hours
+
+**Total**: ~30-35 hours
+
+## Ethical Considerations
+
+- Use API keys ethically and within ToS
+- Respect rate limits and API guidelines
+- Do not use for production systems without review
+- Acknowledge LLM providers in publications
+- Store API keys securely (never commit to git)
+- Review generated content for harmful outputs
+
+## References
+
+- OpenAI API Documentation: https://platform.openai.com/docs
+- Anthropic API Documentation: https://docs.anthropic.com
+- Shannon, C. E. (1948). A Mathematical Theory of Communication
+- Cover, T. M., & Thomas, J. A. (2006). Elements of Information Theory
+
+## Contact
+
+For questions about methodology:
+- Email: ibrahim@ibrahimcesar.com
+- Repository: https://github.com/ibrahimcesar/prompt-entropy-experiment
+
+## Version History
+
+- v1.0 (2024): Initial methodology document
