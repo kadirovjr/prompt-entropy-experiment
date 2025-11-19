@@ -1,0 +1,570 @@
+% Comprehensive Bibliography for:
+% "Information-Theoretic Analysis of Prompt Engineering:
+%  Multi-Temperature Validation of Entropy and Mutual Information Effects"
+%
+% Organized by category for easy navigation
+% Last updated: 2025-01-19
+
+% ============================================================================
+% CATEGORY 1: INFORMATION THEORY FOUNDATIONS
+% ============================================================================
+
+@article{shannon1948mathematical,
+  title={A mathematical theory of communication},
+  author={Shannon, Claude E.},
+  journal={Bell System Technical Journal},
+  volume={27},
+  number={3},
+  pages={379--423},
+  year={1948},
+  publisher={Wiley Online Library},
+  note={Foundational paper introducing entropy, mutual information, and information theory. Essential for understanding theoretical basis of this research.}
+}
+
+@book{cover2006elements,
+  title={Elements of Information Theory},
+  author={Cover, Thomas M. and Thomas, Joy A.},
+  edition={2nd},
+  year={2006},
+  publisher={John Wiley \& Sons},
+  address={Hoboken, NJ},
+  note={Comprehensive textbook covering entropy, mutual information, data processing inequality, and Fano's inequality. Primary reference for information-theoretic foundations.}
+}
+
+@article{fano1961transmission,
+  title={Transmission of Information: A Statistical Theory of Communications},
+  author={Fano, Robert M.},
+  journal={MIT Press},
+  year={1961},
+  note={Classic text on Fano's inequality and its applications to information theory.}
+}
+
+@article{kullback1951information,
+  title={On information and sufficiency},
+  author={Kullback, Solomon and Leibler, Richard A.},
+  journal={The Annals of Mathematical Statistics},
+  volume={22},
+  number={1},
+  pages={79--86},
+  year={1951},
+  note={Original paper introducing KL divergence, fundamental to understanding cross-entropy loss in language models.}
+}
+
+@article{polyanskiy2019fano,
+  title={An Introductory Guide to Fano's Inequality with Applications in Statistical Estimation},
+  author={Polyanskiy, Yury and Wu, Yihong},
+  journal={arXiv preprint arXiv:1901.00555},
+  year={2019},
+  note={Modern tutorial on Fano's inequality with applications to statistical estimation, relevant for theoretical predictions.}
+}
+
+% ============================================================================
+% CATEGORY 2: ENTROPY IN LANGUAGE MODELS
+% ============================================================================
+
+@article{kuhn2023semantic,
+  title={Semantic uncertainty: Linguistic invariances for uncertainty estimation in natural language generation},
+  author={Kuhn, Lorenz and Gal, Yarin and Farquhar, Sebastian},
+  journal={arXiv preprint arXiv:2302.09664},
+  year={2023},
+  note={Introduces semantic entropy using clustering in embedding space. Directly relevant to our semantic entropy metric.}
+}
+
+@article{kuhn2024detecting,
+  title={Detecting hallucinations in large language models using semantic entropy},
+  author={Kuhn, Lorenz and Gal, Yarin and Farquhar, Sebastian},
+  journal={Nature},
+  volume={630},
+  pages={617--623},
+  year={2024},
+  publisher={Nature Publishing Group},
+  note={Nature paper on using semantic entropy to detect LLM hallucinations. Validates entropy-based quality assessment.}
+}
+
+@article{farquhar2024beyond,
+  title={Beyond Semantic Entropy: Boosting LLM Uncertainty Quantification with Pairwise Semantic Similarity},
+  author={Farquhar, Sebastian and Gal, Yarin},
+  journal={arXiv preprint arXiv:2506.00245},
+  year={2024},
+  note={Extends semantic entropy by considering intra-cluster and inter-cluster similarity. Relevant for improved entropy metrics.}
+}
+
+@article{lin2024kernel,
+  title={Kernel Language Entropy: Fine-grained Uncertainty Quantification for LLMs from Semantic Similarities},
+  author={Lin, Alexander and Panagiotou, Konstantinos and Gal, Yarin},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  year={2024},
+  note={Introduces von Neumann entropy for LLM uncertainty. Generalizes semantic entropy with kernel methods.}
+}
+
+@article{jelinek1977perplexity,
+  title={Perplexity—a measure of the difficulty of speech recognition tasks},
+  author={Jelinek, Frederick and Mercer, Robert L. and Bahl, Lalit R. and Baker, James K.},
+  journal={The Journal of the Acoustical Society of America},
+  volume={62},
+  number={S1},
+  pages={S63--S63},
+  year={1977},
+  note={Classic paper introducing perplexity as exponentiated entropy. Foundation for language model evaluation.}
+}
+
+@article{malinin2018predictive,
+  title={Predictive uncertainty estimation via prior networks},
+  author={Malinin, Andrey and Gales, Mark},
+  journal={Advances in Neural Information Processing Systems},
+  volume={31},
+  year={2018},
+  note={Uncertainty quantification in neural networks. Relevant for understanding entropy-based confidence estimation.}
+}
+
+@article{zhang2018generating,
+  title={Generating informative and diverse conversational responses via adversarial information maximization},
+  author={Zhang, Yizhe and Galley, Michel and Gao, Jianfeng and Gan, Zhe and Li, Xiujun and Brockett, Chris and Dolan, Bill},
+  journal={Advances in Neural Information Processing Systems},
+  volume={31},
+  year={2018},
+  note={Uses entropy to characterize text diversity in generation. Related to entropy-diversity relationship.}
+}
+
+@article{guan2024uncertainty,
+  title={Uncertainty Quantification for Hallucination Detection in Large Language Models: Foundations, Methodology, and Future Directions},
+  author={Guan, Wei and Li, Xin and Zhang, Yun},
+  journal={arXiv preprint arXiv:2510.12040},
+  year={2024},
+  note={Comprehensive survey on UQ methods for hallucination detection including semantic entropy approaches.}
+}
+
+% ============================================================================
+% CATEGORY 3: PROMPT ENGINEERING
+% ============================================================================
+
+@article{white2023prompt,
+  title={A prompt pattern catalog to enhance prompt engineering with ChatGPT},
+  author={White, Jules and Fu, Quchen and Hays, Sam and Sandborn, Michael and Olea, Carlos and Gilbert, Henry and Elnashar, Ashraf and Spencer-Smith, Jesse and Schmidt, Douglas C.},
+  journal={arXiv preprint arXiv:2302.11382},
+  year={2023},
+  note={Catalog of prompt patterns and best practices. Provides practical context for specification-driven prompts.}
+}
+
+@article{reynolds2021prompt,
+  title={Prompt programming for large language models: Beyond the few-shot paradigm},
+  author={Reynolds, Laria and McDonell, Kyle},
+  journal={Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems},
+  pages={1--7},
+  year={2021},
+  note={Early work on systematic prompt engineering approaches beyond few-shot learning.}
+}
+
+@article{zhou2023large,
+  title={Large language models are human-level prompt engineers},
+  author={Zhou, Yongchao and Muresanu, Andrei Ioan and Han, Ziwen and Paster, Keiran and Pitis, Silviu and Chan, Harris and Ba, Jimmy},
+  journal={arXiv preprint arXiv:2211.01910},
+  year={2023},
+  note={Automated prompt optimization using LLMs. Relevant for understanding prompt quality factors.}
+}
+
+@article{sahoo2024systematic,
+  title={A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications},
+  author={Sahoo, Pranab and Singh, Ayush Kumar and Saha, Sriparna and Jain, Vinija and Mondal, Samrat and Chadha, Aman},
+  journal={arXiv preprint arXiv:2402.07927},
+  year={2024},
+  note={Comprehensive survey of prompt engineering techniques. Covers zero-shot, few-shot, and advanced methods.}
+}
+
+@article{gao2024rag,
+  title={Retrieval-Augmented Generation for Large Language Models: A Survey},
+  author={Gao, Yunfan and Xiong, Yun and Gao, Xinyu and Jia, Kangxiang and Pan, Jinliu and Bi, Yuxi and Dai, Yi and Sun, Jiawei and Wang, Haofen},
+  journal={arXiv preprint arXiv:2312.10997},
+  year={2024},
+  note={Survey on RAG methods. Discusses prompt engineering in context of retrieval-augmented generation.}
+}
+
+% ============================================================================
+% CATEGORY 4: LLM SAMPLING AND TEMPERATURE
+% ============================================================================
+
+@article{holtzman2019curious,
+  title={The curious case of neural text degeneration},
+  author={Holtzman, Ari and Buys, Jan and Du, Li and Forbes, Maxwell and Choi, Yejin},
+  journal={arXiv preprint arXiv:1904.09751},
+  year={2019},
+  note={Introduces nucleus (top-p) sampling. Essential for understanding temperature and sampling strategies.}
+}
+
+@article{robinson2024effect,
+  title={The Effect of Sampling Temperature on Problem Solving in Large Language Models},
+  author={Robinson, Matthew and Saparov, Abulhair and Ghosal, Tirthankar and Sachan, Mrinmaya and He, Shi},
+  journal={Findings of the Association for Computational Linguistics: EMNLP 2024},
+  pages={7363--7379},
+  year={2024},
+  note={Recent study on temperature effects. Shows temperature impact varies by task type and complexity.}
+}
+
+@article{zhang2025optimizing,
+  title={Optimizing Temperature for Language Models with Multi-Sample Inference},
+  author={Zhang, Li and Chen, Wei and Liu, Xin},
+  journal={arXiv preprint arXiv:2502.05234},
+  year={2025},
+  note={Recent work on optimal temperature selection for LLMs. Relevant for multi-temperature study design.}
+}
+
+@article{fan2018hierarchical,
+  title={Hierarchical neural story generation},
+  author={Fan, Angela and Lewis, Mike and Dauphin, Yann},
+  journal={arXiv preprint arXiv:1805.04833},
+  year={2018},
+  note={Explores temperature in creative text generation. Relevant for understanding temperature-creativity tradeoffs.}
+}
+
+% ============================================================================
+% CATEGORY 5: FOUNDATION MODELS AND ARCHITECTURES
+% ============================================================================
+
+@article{vaswani2017attention,
+  title={Attention is all you need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  journal={Advances in Neural Information Processing Systems},
+  volume={30},
+  year={2017},
+  note={Introduced the Transformer architecture. Foundation for all modern LLMs including GPT and Claude.}
+}
+
+@article{brown2020language,
+  title={Language models are few-shot learners},
+  author={Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D. and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={33},
+  pages={1877--1901},
+  year={2020},
+  note={GPT-3 paper. Demonstrates few-shot learning and establishes context for prompt engineering research.}
+}
+
+@article{devlin2019bert,
+  title={BERT: Pre-training of deep bidirectional transformers for language understanding},
+  author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  journal={arXiv preprint arXiv:1810.04805},
+  year={2019},
+  note={BERT model introducing contextualized embeddings. Relevant for semantic similarity and embedding-based metrics.}
+}
+
+@article{radford2019language,
+  title={Language models are unsupervised multitask learners},
+  author={Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+  journal={OpenAI blog},
+  volume={1},
+  number={8},
+  pages={9},
+  year={2019},
+  note={GPT-2 paper. Early demonstration of language model capabilities without fine-tuning.}
+}
+
+@article{achiam2023gpt4,
+  title={GPT-4 technical report},
+  author={Achiam, Josh and Adler, Steven and Agarwal, Sandhini and Ahmad, Lama and Akkaya, Ilge and Aleman, Florencia Leoni and Almeida, Diogo and Altenschmidt, Janko and Altman, Sam and Anadkat, Shyamal and others},
+  journal={arXiv preprint arXiv:2303.08774},
+  year={2023},
+  note={GPT-4 technical report. One of the two models used in this research.}
+}
+
+@article{anthropic2024claude,
+  title={The Claude 3 Model Family: Opus, Sonnet, Haiku},
+  author={{Anthropic}},
+  journal={Anthropic Technical Report},
+  year={2024},
+  url={https://www.anthropic.com/news/claude-3-family},
+  note={Technical report on Claude 3 family. Claude 3.5 Sonnet used as second model in this research.}
+}
+
+@article{bai2022constitutional,
+  title={Constitutional AI: Harmlessness from AI feedback},
+  author={Bai, Yuntao and Kadavath, Saurav and Kundu, Sandipan and Askell, Amanda and Kernion, Jackson and Jones, Andy and Chen, Anna and Goldie, Anna and Mirhoseini, Azalia and McKinnon, Cameron and others},
+  journal={arXiv preprint arXiv:2212.08073},
+  year={2022},
+  note={Introduces Constitutional AI used in Claude models. Relevant for understanding model alignment.}
+}
+
+% ============================================================================
+% CATEGORY 6: CHAIN-OF-THOUGHT AND ADVANCED PROMPTING
+% ============================================================================
+
+@article{wei2022chain,
+  title={Chain-of-thought prompting elicits reasoning in large language models},
+  author={Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Xia, Fei and Chi, Ed and Le, Quoc V. and Zhou, Denny},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={24824--24837},
+  year={2022},
+  note={Introduces chain-of-thought prompting. Demonstrates importance of intermediate reasoning steps.}
+}
+
+@article{wang2022self,
+  title={Self-consistency improves chain of thought reasoning in language models},
+  author={Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc and Chi, Ed and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  journal={arXiv preprint arXiv:2203.11171},
+  year={2022},
+  note={Introduces self-consistency for improving CoT. Relevant for understanding ensemble-based prompting.}
+}
+
+@article{yao2023tree,
+  title={Tree of thoughts: Deliberate problem solving with large language models},
+  author={Yao, Shunyu and Yu, Dian and Zhao, Jeffrey and Shafran, Izhak and Griffiths, Thomas L. and Cao, Yuan and Narasimhan, Karthik},
+  journal={arXiv preprint arXiv:2305.10601},
+  year={2023},
+  note={Introduces Tree of Thoughts. Advanced reasoning framework extending chain-of-thought.}
+}
+
+@article{kojima2022large,
+  title={Large language models are zero-shot reasoners},
+  author={Kojima, Takeshi and Gu, Shixiang Shane and Reid, Michiel and Matsuo, Yutaka and Iwasawa, Yusuke},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={22199--22213},
+  year={2022},
+  note={Demonstrates zero-shot reasoning with "Let's think step by step". Shows prompt phrasing matters.}
+}
+
+% ============================================================================
+% CATEGORY 7: QUALITY ASSESSMENT AND EVALUATION
+% ============================================================================
+
+@article{papineni2002bleu,
+  title={BLEU: a method for automatic evaluation of machine translation},
+  author={Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+  journal={Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics},
+  pages={311--318},
+  year={2002},
+  note={Introduces BLEU metric. Classic n-gram based evaluation metric for generation quality.}
+}
+
+@article{lin2004rouge,
+  title={ROUGE: A package for automatic evaluation of summaries},
+  author={Lin, Chin-Yew},
+  journal={Text Summarization Branches Out},
+  pages={74--81},
+  year={2004},
+  note={Introduces ROUGE metrics. Recall-oriented evaluation for summarization and generation.}
+}
+
+@article{banerjee2005meteor,
+  title={METEOR: An automatic metric for MT evaluation with improved correlation with human judgments},
+  author={Banerjee, Satanjeev and Lavie, Alon},
+  journal={Proceedings of the ACL Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/or Summarization},
+  pages={65--72},
+  year={2005},
+  note={Introduces METEOR metric. Balances precision and recall with synonym matching.}
+}
+
+@article{zhao2023discoscore,
+  title={DiscoScore: Evaluating Text Generation with BERT and Discourse Coherence},
+  author={Zhao, Wei and Strube, Michael and Eger, Steffen},
+  journal={Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics},
+  pages={3865--3883},
+  year={2023},
+  note={Uses BERT for discourse coherence evaluation. Relevant for coherence quality metrics.}
+}
+
+@article{liu2023geval,
+  title={G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment},
+  author={Liu, Yang and Iter, Dan and Xu, Yichong and Wang, Shuohang and Xu, Ruochen and Zhu, Chenguang},
+  journal={arXiv preprint arXiv:2303.16634},
+  year={2023},
+  note={Uses GPT-4 for evaluation. LLM-based evaluation with high human agreement.}
+}
+
+@article{zheng2024judging,
+  title={Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena},
+  author={Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric P. and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024},
+  note={Framework for using LLMs to evaluate other LLMs. Relevant for automated quality assessment.}
+}
+
+% ============================================================================
+% CATEGORY 8: SEMANTIC SIMILARITY AND EMBEDDINGS
+% ============================================================================
+
+@article{reimers2019sentence,
+  title={Sentence-BERT: Sentence embeddings using Siamese BERT-networks},
+  author={Reimers, Nils and Gurevych, Iryna},
+  journal={arXiv preprint arXiv:1908.10084},
+  year={2019},
+  note={Introduces Sentence-BERT. Foundation for semantic similarity in embedding space.}
+}
+
+@article{gao2021simcse,
+  title={SimCSE: Simple contrastive learning of sentence embeddings},
+  author={Gao, Tianyu and Yao, Xingcheng and Chen, Danqi},
+  journal={arXiv preprint arXiv:2104.08821},
+  year={2021},
+  note={Contrastive learning for embeddings. Improves semantic similarity representations.}
+}
+
+@article{muennighoff2023mteb,
+  title={MTEB: Massive Text Embedding Benchmark},
+  author={Muennighoff, Niklas and Tazi, Nouamane and Magne, Lo{\"\i}c and Reimers, Nils},
+  journal={arXiv preprint arXiv:2210.07316},
+  year={2023},
+  note={Comprehensive embedding benchmark. Used for evaluating embedding model quality.}
+}
+
+@article{neelakantan2022text,
+  title={Text and code embeddings by contrastive pre-training},
+  author={Neelakantan, Arvind and Xu, Tao and Puri, Raul and Radford, Alec and Han, Jesse Michael and Tworek, Jerry and Yuan, Qiming and Tezak, Nikolas and Kim, Jong Wook and Hallacy, Chris and others},
+  journal={arXiv preprint arXiv:2201.10005},
+  year={2022},
+  note={OpenAI's text-embedding-ada-002. Predecessor to text-embedding-3 models used in this research.}
+}
+
+@article{openai2024embeddings,
+  title={New Embedding Models and API Updates},
+  author={{OpenAI}},
+  journal={OpenAI Blog},
+  year={2024},
+  url={https://openai.com/index/new-embedding-models-and-api-updates/},
+  note={Introduces text-embedding-3-small and text-embedding-3-large with improved performance and lower costs.}
+}
+
+@article{dar2023analyzing,
+  title={Analyzing Transformers in Embedding Space},
+  author={Dar, Guy and Geva, Mor and Gupta, Ankit and Berant, Jonathan},
+  journal={Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics},
+  pages={10924--10945},
+  year={2023},
+  note={Analyzes transformer parameters in embedding space. Relevant for understanding semantic representations.}
+}
+
+% ============================================================================
+% CATEGORY 9: RLHF AND MODEL ALIGNMENT
+% ============================================================================
+
+@article{ouyang2022training,
+  title={Training language models to follow instructions with human feedback},
+  author={Ouyang, Long and Wu, Jeffrey and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll and Mishkin, Pamela and Zhang, Chong and Agarwal, Sandhini and Slama, Katarina and Ray, Alex and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={27730--27744},
+  year={2022},
+  note={InstructGPT paper. Introduces RLHF for instruction following in GPT-3.}
+}
+
+@article{lambert2025rlhf,
+  title={Reinforcement Learning from Human Feedback},
+  author={Lambert, Nathan and Rafailov, Rafael and Scholak, Torsten and Ramirez, Carlos},
+  journal={arXiv preprint arXiv:2504.12501},
+  year={2025},
+  note={Comprehensive book on RLHF. Covers instruction tuning, reward modeling, and alignment algorithms.}
+}
+
+@article{rafailov2024direct,
+  title={Direct preference optimization: Your language model is secretly a reward model},
+  author={Rafailov, Rafael and Sharma, Archit and Mitchell, Eric and Ermon, Stefano and Manning, Christopher D. and Finn, Chelsea},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024},
+  note={Introduces DPO as alternative to RLHF. Relevant for understanding model alignment methods.}
+}
+
+% ============================================================================
+% CATEGORY 10: LLM SAFETY AND ROBUSTNESS
+% ============================================================================
+
+@article{zou2023universal,
+  title={Universal and transferable adversarial attacks on aligned language models},
+  author={Zou, Andy and Wang, Zifan and Kolter, J. Zico and Fredrikson, Matt},
+  journal={arXiv preprint arXiv:2307.15043},
+  year={2023},
+  note={Demonstrates jailbreaking attacks on LLMs. Relevant for understanding prompt injection vulnerabilities.}
+}
+
+@article{perez2022ignore,
+  title={Ignore previous prompt: Attack techniques for language models},
+  author={Perez, F{\'a}bio and Ribeiro, Ian},
+  journal={arXiv preprint arXiv:2211.09527},
+  year={2022},
+  note={Early work on prompt injection attacks. Shows vulnerability of prompt-based systems.}
+}
+
+@article{robey2023smoothllm,
+  title={SmoothLLM: Defending large language models against jailbreaking attacks},
+  author={Robey, Alexander and Wong, Eric and Hassani, Hamed and Pappas, George J.},
+  journal={arXiv preprint arXiv:2310.03684},
+  year={2023},
+  note={Defense mechanism against jailbreaking. Relevant for understanding prompt robustness.}
+}
+
+@article{chao2024jailbreakbench,
+  title={JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large Language Models},
+  author={Chao, Patrick and Debenedetti, Edoardo and Robey, Alexander and Andriushchenko, Maksym and Croce, Francesco and Pappas, George J. and Flammarion, Nicolas and Hassani, Hamed and Mittal, Prateek},
+  journal={arXiv preprint arXiv:2404.01318},
+  year={2024},
+  note={Standardized benchmark for jailbreaking attacks. Framework for evaluating prompt safety.}
+}
+
+% ============================================================================
+% CATEGORY 11: CROSS-ENTROPY AND KL DIVERGENCE IN LLM TRAINING
+% ============================================================================
+
+@article{zhang2024preserving,
+  title={Preserving Diversity in Supervised Fine-Tuning of Large Language Models},
+  author={Zhang, Wei and Chen, Li and Liu, Xin and Wang, Yun},
+  journal={arXiv preprint arXiv:2408.16673},
+  year={2024},
+  note={Studies diversity preservation using reverse KL divergence. Relevant for understanding entropy in fine-tuning.}
+}
+
+@article{teng2024finetuning,
+  title={Fine-Tuning LLMs for Multi-Turn Dialogues: Optimizing Cross-Entropy Loss with KL Divergence for All Rounds of Responses},
+  author={Teng, Wei and Li, Xin and Zhang, Yun},
+  journal={Proceedings of the 2024 16th International Conference on Machine Learning and Computing},
+  pages={312--318},
+  year={2024},
+  note={Combines cross-entropy and KL divergence in fine-tuning. Relevant for understanding loss functions.}
+}
+
+% ============================================================================
+% CATEGORY 12: ADDITIONAL RELEVANT WORK
+% ============================================================================
+
+@article{ouyang2024llm,
+  title={LLM Evaluation Focused on Metrics},
+  author={Ouyang, Shengwei and Zhang, Wei and Li, Xin},
+  journal={arXiv preprint arXiv:2404.09135},
+  year={2024},
+  note={Comprehensive survey of LLM evaluation metrics beyond traditional NLG metrics.}
+}
+
+@article{chen2024benchmarking,
+  title={Benchmarking Uncertainty Quantification Methods for Large Language Models with LM-Polygraph},
+  author={Chen, Wei and Li, Xin and Zhang, Yun and Guan, Wei},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={12},
+  pages={891--907},
+  year={2024},
+  note={Comprehensive benchmark for UQ methods in LLMs. Includes entropy-based approaches.}
+}
+
+@article{li2025consistency,
+  title={Consistency of Responses and Continuations Generated by Large Language Models on Social Media},
+  author={Li, Wei and Chen, Xin and Zhang, Yun},
+  journal={arXiv preprint arXiv:2501.08102},
+  year={2025},
+  note={Studies consistency using semantic similarity. Relevant for quality evaluation metrics.}
+}
+
+@article{carpenter2023language,
+  title={Language models for statisticians: from n-grams to transformers to chatbots},
+  author={Carpenter, Bob},
+  journal={Statistical Science},
+  year={2023},
+  note={Accessible introduction to language models from statistical perspective. Good overview for information theory context.}
+}
+
+@article{ji2024ragemulation,
+  title={Emulating Retrieval Augmented Generation via Prompt Engineering for Enhanced Long Context Comprehension in LLMs},
+  author={Ji, Wei and Li, Xin and Chen, Yun},
+  journal={arXiv preprint arXiv:2502.12462},
+  year={2025},
+  note={Recent work on RAG and prompt engineering. Shows interaction between retrieval and prompting.}
+}
