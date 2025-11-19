@@ -2,13 +2,36 @@
 
 This document describes the complete methodology for generating the experimental dataset used in the prompt entropy research, ensuring full reproducibility of results.
 
+## Quick Start
+
+**Complete experimental workflow in one command:**
+
+```bash
+# 1. Setup
+make setup
+make init-env  # Configure API keys in .env
+
+# 2. Run complete experiment (collect data + calculate metrics)
+make run-experiment EXPERIMENT=exp001 CONFIG=config/tasks.json
+
+# 3. View results
+cat data/processed/metrics_summary.csv
+cat logs/exp001_summary.json | jq
+```
+
+**All steps are logged with full audit trails** (git state, parameters, file hashes, timestamps).
+
+See `scripts/README.md` for detailed usage.
+
 ## Overview
 
 The dataset consists of **1,800 LLM generations** collected across:
 - **30 tasks** spanning 6 domains
 - **2 prompt types** (specification-driven vs. vague)
-- **2 models** (GPT-4, Claude-3 Opus)
+- **2 models** (GPT-4, Claude-3.5 Sonnet)
 - **30 samples per condition** with temperature=1.0
+
+**All data collection uses Makefile commands with full audit logging for reproducibility.**
 
 ## Experimental Design
 
@@ -100,67 +123,139 @@ Write a search function.
 ### Environment Setup
 
 ```bash
-# 1. Set up virtual environment
-python -m venv venv
-source venv/bin/activate
+# 1. Complete first-time setup (creates dirs + installs deps + checks env)
+make setup
 
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Configure API keys
-cp .env.example .env
+# 2. Configure API keys
+make init-env  # Creates .env template
 # Edit .env with your API keys:
 # OPENAI_API_KEY=your_key_here
 # ANTHROPIC_API_KEY=your_key_here
+
+# 3. Verify environment
+make check-env
 ```
 
-### Collection Script
+### Makefile-Driven Collection (Recommended)
+
+All data collection is managed through Makefile targets with **full audit logging**:
+
+```bash
+# Complete experiment with default settings
+make run-experiment EXPERIMENT=exp001
+
+# Or run steps individually:
+# 1. Collect data
+make collect-data EXPERIMENT=exp001 \
+    CONFIG=config/tasks.json \
+    MODELS="gpt-4 claude-3.5-sonnet" \
+    N_SAMPLES=30
+
+# 2. Calculate metrics
+make calculate-metrics EXPERIMENT=exp001
+```
+
+**Quick test with small sample:**
+```bash
+make collect-sample EXPERIMENT=test01
+```
+
+**Customization via environment variables:**
+```bash
+# Custom configuration
+export EXPERIMENT=exp002_high_temp
+export MODELS="gpt-4"
+export PROMPT_TYPES="specification vague"
+export N_SAMPLES=50
+export TEMPERATURE=1.5
+export CONFIG=config/custom_tasks.json
+
+make collect-data
+```
+
+### Audit Logging
+
+Every data collection run creates comprehensive audit logs:
+
+**Automatic tracking:**
+- Git commit hash and branch
+- Uncommitted changes flag
+- System information (OS, Python version)
+- All parameters and configurations
+- SHA256 hashes of all output files
+- Execution timestamps and durations
+- Success/failure status with errors
+
+**Log files:**
+```
+logs/
+├── exp001.jsonl              # Streaming event log
+└── exp001_summary.json       # Experiment summary
+```
+
+**View logs:**
+```bash
+# List recent experiments
+make view-logs
+
+# View detailed log
+cat logs/exp001.jsonl | jq
+
+# View summary
+cat logs/exp001_summary.json | jq
+
+# Filter events
+cat logs/exp001.jsonl | jq 'select(.event_type=="data_collection")'
+```
+
+### Manual Collection (Alternative)
+
+For custom workflows, use Python scripts directly:
 
 ```python
 from src.sampling import sample_responses
-from src.utils import save_json, ensure_dir
-import time
+from src.utils import AuditLogger, save_json
 
-# Configuration
-TASKS = [...]  # Load from tasks.json
+# Initialize audit logger
+logger = AuditLogger(experiment_name='exp001')
+
+# Configure
+MODELS = ['gpt-4', 'claude-3.5-sonnet']
 PROMPT_TYPES = ['specification', 'vague']
-MODELS = ['gpt-4', 'claude-3-opus']
 N_SAMPLES = 30
 TEMPERATURE = 1.0
 
 # Collection loop
-for task_id, task in enumerate(TASKS):
+for task in tasks:
     for prompt_type in PROMPT_TYPES:
         for model in MODELS:
-            # Get appropriate prompt
-            prompt = task['prompts'][prompt_type]
+            # Log step
+            logger.log_step(
+                step_name=f"Collect task {task['id']}",
+                step_type='data_collection',
+                parameters={'model': model, 'n': N_SAMPLES}
+            )
 
             # Sample responses
             responses = sample_responses(
-                prompt=prompt,
+                prompt=task['prompts'][prompt_type],
                 model=model,
                 n=N_SAMPLES,
                 temperature=TEMPERATURE,
-                show_progress=True,
-                delay_between_requests=0.5,  # Rate limiting
             )
 
-            # Save raw data
-            filename = f"task_{task_id}_{prompt_type}_{model}.json"
-            save_json({
-                'task_id': task_id,
-                'task_description': task['description'],
-                'prompt_type': prompt_type,
-                'prompt': prompt,
-                'model': model,
-                'temperature': TEMPERATURE,
-                'n_samples': N_SAMPLES,
-                'responses': responses,
-                'timestamp': time.time(),
-            }, f"data/raw/{filename}")
+            # Save and log
+            output_file = f"data/raw/task_{task['id']}_{prompt_type}_{model}.json"
+            save_json({...}, output_file)
 
-            # Rate limiting between conditions
-            time.sleep(2)
+            logger.log_file_output(
+                operation='save',
+                file_path=output_file,
+                file_type='json'
+            )
+
+# Finalize
+logger.finalize()
 ```
 
 ### Rate Limiting
