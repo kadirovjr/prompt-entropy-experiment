@@ -1,7 +1,7 @@
 <div align="right">
 **"The limits of my language mean the limits of my world."**
   — Ludwig Wittgenstein, _Philosophical Investigations_
-<div>
+</div>
 
 # Prompt Entropy Experiment
 
